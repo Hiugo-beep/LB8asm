@@ -14,7 +14,8 @@ screen_offset equ 156 + 160        ;offset for scan code      (156 + 160) (2-d s
 file_name db 70 dup('$')      ;file name
 id dw ?                       ;file id
 key_buffer db 2 dup ('$')     ;buff for scan code  
-screen_mode_message db "YOU PRESSED:",'$'
+screen_mode_message db "YOU PRESSED:",'$'   
+welcome db "Program start!$"
 open_message db "File was opened",'$'              
 close_message db 0Ah,0Dh,"File was closed",'$'                
 error_message db "Fail during working with files..",'$'  
@@ -138,7 +139,8 @@ iret
 int15_new_handler endp  
            
 ;/////////////////////////////////////////////INSTALLER INTERRUPT HANDLER////////////////////////////////////           
-installer: 
+installer:  
+   print welcome
    call get_file_name      ;fet file name
    
    continue_main: 
